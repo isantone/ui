@@ -1,0 +1,16 @@
+<p>Visible chips: {{ visibleChipsAmount }} / {{ chipComponents?.length }}</p>
+
+<div
+  #chipsContainer
+  class="chips__container"
+>
+  <ng-content></ng-content>
+
+  <isa-chip
+    *ngIf="!!hiddenChipsAmount"
+    class="chips__overflow-chip"
+    [accentColor]="true"
+  >
+    +{{ hiddenChipsAmount }}
+  </isa-chip>
+</div>
