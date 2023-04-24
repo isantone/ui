@@ -1,0 +1,100 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "plugins": ["@typescript-eslint", "simple-import-sort", "unused-imports", "prettier"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": { "project": "./tsconfig.*?.json" },
+      "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:import/recommended",
+        // Turns off all rules that might conflict with Prettier
+        "prettier"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+
+        "no-unneeded-ternary": "error",
+        "no-nested-ternary": "error",
+        "comma-dangle": ["error", "always-multiline"],
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ],
+
+        "import/no-unresolved": "off",
+        "import/order": "off",
+        "import/prefer-default-export": "off",
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-duplicates": "error",
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/test-setup.ts"] }],
+
+        "simple-import-sort/exports": "error",
+        "simple-import-sort/imports": [
+          "error",
+          {
+            // The default grouping, but with type imports last as a separate group
+            "groups": [
+              ["^\\u0000"],
+              ["^@angular", "^@?\\w"],
+              ["^@isantone/ui"],
+              ["^"],
+              ["^\\."],
+              ["^.+\\u0000$"]
+            ]
+          }
+        ],
+
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "parserOptions": { "project": "./tsconfig.*?.json" },
+      "env": {
+        "jasmine": true
+      },
+      "rules": {}
+    }
+  ]
+}
